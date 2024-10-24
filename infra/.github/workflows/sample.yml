@@ -1,5 +1,5 @@
 name: provision tools infra
-on: [push,workflow_dispatch]
+on: [push]
 jobs:
   provision:
     runs-on: ubuntu-latest
