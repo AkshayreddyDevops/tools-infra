@@ -1,0 +1,10 @@
+name: provision tools infra
+on: [push,workflow_dispatch]
+jobs:
+  provision:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: terraform init
+
+#
