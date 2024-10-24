@@ -1,10 +1,21 @@
-name: provision tools infra
-on: [push,workflow_dispatch]
+# name: provision tools infra
+# on: [push,workflow_dispatch]
+# jobs:
+#   provision:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - uses: actions/checkout@v4
+#       - run: terraform init
+
+name: learn-github-action
+on: [push]
 jobs:
-  provision:
+  dev:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - run: terraform init
-
-#
+      - run: echo hello-dev
+  prod:
+    needs: [dev]
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo hello-prod
