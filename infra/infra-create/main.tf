@@ -11,13 +11,13 @@ resource "aws_security_group" "tool-sg"{
   name = "${var.name}-sg"
   description ="${var.name}-sg"
 
-  egress = {
+  egress {
     from_port = 0
     to_port = 0
     protocol = "-1"
     cidr_blocks = ["0.0.0.0/0"]
   }
-  ingress = {
+  ingress  {
     from_port = 22
     to_port = 22
     protocol = "-1"
