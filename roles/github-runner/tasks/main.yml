@@ -1,0 +1,20 @@
+- name: create github dir
+  ansible.builtin.file:
+    path: /actions-runner
+    state: directory
+
+- name: download & extract Runner content
+  ansible.builtin.unarchive:
+    src: https://github.com/actions/runner/releases/download/v2.320.0/actions-runner-linux-x64-2.320.0.tar.gz
+    dest: /actions-runner
+    remote_src: yes
+
+- name: download github cli
+  ansible.builtin.git_url:
+    url: https://cli.github.com/packages/rpm
+    dest: /etc/yum.repos.d/gh-cli.repo
+
+- name: install github cli
+  ansible.builtin.dnf:
+    name: gh-cli
+    state: latest
