@@ -10,8 +10,8 @@
     remote_src: yes
 
 - name: download github cli
-  ansible.builtin.git:
-    repo: https://cli.github.com/packages/rpm
+  ansible.builtin.get_url:
+    url: https://cli.github.com/packages/rpm
     dest: /etc/yum.repos.d/gh-cli.repo
 
 - name: install github cli
