@@ -16,5 +16,5 @@
 
 - name: install github cli
   ansible.builtin.dnf:
-    name: gh-cli
+    name: gh
     state: latest
