@@ -1,0 +1,5 @@
+- name: run ansible role
+  hosts: all
+  become: true
+  roles:
+    - "{{ role_name }}"
