@@ -1,0 +1,20 @@
+{
+	"folders": [
+		{
+			"path": "../../../../Phase1.1"
+		},
+		{
+			"name": "Terraform",
+			"path": "../../../../Terraform"
+		},
+		{
+			"name": "learn-github-actions",
+			"path": "../../../../learn-github-actions"
+		},
+		{
+			"name": "tools-infra",
+			"path": "../../.."
+		}
+	],
+	"settings": {}
+}
