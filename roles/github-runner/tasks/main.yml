@@ -37,7 +37,7 @@
     msg: "{{ runner_count.stdout }}"
 
 - name: configure runner and start if not running
-  when: runner_count.stdout | int  > 2
+  when: runner_count.stdout == "0"
   block:
     - name: configure github runner
       ansible.builtin.shell: ./config.sh --url https://github.com/AkshayreddyDevops --token {{ token.stdout }} --unattended --runnergroup Default --name ec2 --labels rhel --work _work --replace
