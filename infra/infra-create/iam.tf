@@ -21,5 +21,5 @@ resource "aws_iam_role" "admin_role"{
 resource "aws_iam_role_policy_attachment" "policy-attach"{
   count = length(var.policy_name)
   role = aws_iam_role.admin_role.name
-  policy_arn = ["arn:aws:iam::aws:policy/AdministratorAccess"]
+  policy_arn = "arn:aws:iam::aws:policy/${var.policy_name[count.index]}"
 }
