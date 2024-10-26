@@ -30,14 +30,14 @@
   register: token
 - name: git runner list
   ansible.builtin.shell: 'gh api    -H "Accept: application/vnd.github+json"   -H "X-GitHub-Api-Version: 2022-11-28"   /orgs/AkshayreddyDevops/actions/runners|jq .total_count'
-  register: runner_count | int
+  register: runner_count
 
 - name: output
   ansible.legacy.debug:
     msg: "{{ runner_count.stdout }}"
 
 - name: configure runner and start if not running
-  when: runner_count.stdout   > 2
+  when: runner_count.stdout | int  > 2
   block:
     - name: configure github runner
       ansible.builtin.shell: ./config.sh --url https://github.com/AkshayreddyDevops --token {{ token.stdout }} --unattended --runnergroup Default --name ec2 --labels rhel --work _work --replace
