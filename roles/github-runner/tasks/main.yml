@@ -34,7 +34,7 @@
 
 - name: output
   ansible.legacy.debug:
-    msg: "{{ runner_count }}"
+    msg: "{{ runner_count.stdout }}"
 
 - name: configure runner and start if not running
   when: runner_count | int  > 2
