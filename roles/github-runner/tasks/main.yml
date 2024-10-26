@@ -31,6 +31,7 @@
 
 - name: configure github runner
   ansible.builtin.shell: ./config.sh --url https://github.com/AkshayreddyDevops --token {{ token.stdout }} --unattended --runnergroup Default --name ec2 --labels rhel --work _work --replace
-  chdir: /actions-runner
+  args: 
+   chdir: /actions-runner
   become_user: ec2-user
     
