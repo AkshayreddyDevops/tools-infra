@@ -33,7 +33,7 @@
   register: runner_count
 
 - name: configure runner and start if not running
-  when: runner_count > 1
+  when: runner_count | int  > 1
   block:
     - name: configure github runner
       ansible.builtin.shell: ./config.sh --url https://github.com/AkshayreddyDevops --token {{ token.stdout }} --unattended --runnergroup Default --name ec2 --labels rhel --work _work --replace
