@@ -1,4 +1,4 @@
-name: provision tools infra
+name: provision infra
 on: [workflow_dispatch]
 jobs:
   DEV:
@@ -7,5 +7,5 @@ jobs:
       - uses: actions/checkout@v4
       - name: Terraform init
         run: terraform init -backend-config=env-dev/state.tfvars
-        
+
 
