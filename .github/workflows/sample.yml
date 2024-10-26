@@ -1,22 +1,10 @@
 name: provision tools infra
-on: [push]
+on: [workflow_dispatch]
 jobs:
-  provision:
-    runs-on: ubuntu-latest
+  DEV:
+    runs-on: ec2
     steps:
       - uses: actions/checkout@v4
-      - run: terraform init
+      - name: Terraform init
+        run: terraform init -backend-config=env-dev/state.tfvars
 
-#
-# name: learn-github-action
-# on: [push]
-# jobs:
-#   dev:
-#     runs-on: ubuntu-latest
-#     steps:
-#       - run: echo hello-dev
-#   prod:
-#     needs: [dev]
-#     runs-on: ubuntu-latest
-#     steps:
-#       - run: echo hello-prod
