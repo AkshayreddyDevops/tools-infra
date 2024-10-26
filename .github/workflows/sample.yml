@@ -6,9 +6,13 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: cd  to /home/ec2-user/gitRepo/tools-infra/infra/state.tf
-        run: cd /home/ec2-user/.gitRepo/tools-infra/infra
+        run: cd /home/ec2-user/gitRepo/tools-infra/infra
+      - name: pwd
+        run: pwd
+      - name: ip
+        run: ifconfig -a
       - name: Terraform init
-        run: terraform init -backend-config=/home/ec2-user/.gitRepo/tools-infra/infra/state.tf
+        run: terraform init -backend-config=/home/ec2-user/gitRepo/tools-infra/infra/state.tf
 
 #Hello test
 
