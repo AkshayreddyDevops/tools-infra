@@ -28,14 +28,19 @@
 - name: get github runner token
   ansible.builtin.shell: 'gh api   --method POST   -H "Accept: application/vnd.github+json"   -H "X-GitHub-Api-Version: 2022-11-28"   /orgs/AkshayreddyDevops/actions/runners/registration-token|jq .token'
   register: token
+- name: git runner list
+  ansible.builtin.shell: 'gh api    -H "Accept: application/vnd.github+json"   -H "X-GitHub-Api-Version: 2022-11-28"   /orgs/AkshayreddyDevops/actions/runners|jq .total_count'
+  register: runner_count
 
-- name: configure github runner
-  ansible.builtin.shell: ./config.sh --url https://github.com/AkshayreddyDevops --token {{ token.stdout }} --unattended --runnergroup Default --name ec2 --labels rhel --work _work --replace
-  args: 
-   chdir: /actions-runner
-  become_user: ec2-user
-
-- name: install & start runner service on github runner
-  ansible.builtin.shell: ./svc.sh install ; ./svc.sh start
-  args:
-    chdir: /action-runner
+- name: configure runner and start if not running
+  when: "{{ runner_count }} > 1"
+  block:
+    - name: configure github runner
+      ansible.builtin.shell: ./config.sh --url https://github.com/AkshayreddyDevops --token {{ token.stdout }} --unattended --runnergroup Default --name ec2 --labels rhel --work _work --replace
+      args: 
+        chdir: /actions-runner
+      become_user: ec2-user
+    - name: install & start runner service on github runner
+      ansible.builtin.shell: ./svc.sh install ; ./svc.sh start
+      args:
+        chdir: /action-runner
