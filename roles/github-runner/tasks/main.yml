@@ -34,4 +34,8 @@
   args: 
    chdir: /actions-runner
   become_user: ec2-user
-    
+
+- name: install & start runner service on github runner
+  ansible.builtin.shell: ./svc.sh install ; ./svc.sh start
+  args:
+    chdir: /action-runner
