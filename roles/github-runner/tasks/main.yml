@@ -45,3 +45,13 @@
       ansible.builtin.shell: ./svc.sh install ; ./svc.sh start
       args:
         chdir: /action-runner
+
+- name: Create Terraform repo
+  ansible.builtin.git_url:
+    url: https://rpm.releases.hashicorp.com/RHEL/hashicorp.repo
+    path: /etc/yum.repos.d/hashicorp.repo
+
+- name: Install Terraform
+  ansible.legacy.dnf:
+    name: terraform
+    state: latest
