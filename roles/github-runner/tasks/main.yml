@@ -49,7 +49,7 @@
 - name: Create Terraform repo
   ansible.builtin.get_url:
     url: https://rpm.releases.hashicorp.com/RHEL/hashicorp.repo
-    path: /etc/yum.repos.d/hashicorp.repo
+    dest: /etc/yum.repos.d/hashicorp.repo
 
 - name: Install Terraform
   ansible.legacy.dnf:
