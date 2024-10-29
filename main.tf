@@ -12,4 +12,7 @@ module "vpc" {
   cidr = var.vpc["cidr"]
   env = var.env
   public_subnets = var.vpc["public_subnets"]
+  db_subnets = var.vpc["db_subnets"]
+  app_subnets = var.vpc["app_subnets"]
+  web_subnets = var.vpc["web_subnets"]
 }

@@ -16,3 +16,34 @@ resource "aws_subnet" "public" {
     Name = "public-subnet"
   }
 }
+
+resource "aws_subnet" "db" {
+  count = length(var.db_subnets)
+  vpc_id = aws_vpc.main.id
+  cidr_block = var.db_subnets[count.index]
+
+  tags = {
+    Name = "DB-Subnets"
+  }
+}
+
+
+resource "aws_subnet" "app" {
+  count = length(var.app_subnets)
+  vpc_id = aws_vpc.main.id
+  cidr_block = var.app_subnets[count.index]
+
+  tags = {
+    Name = "app-Subnets"
+  }
+}
+
+resource "aws_subnet" "web" {
+  count = length(var.web_subnets)
+  vpc_id = aws_vpc.main.id
+  cidr_block = var.web_subnets[count.index]
+
+  tags = {
+    Name = "app-Subnets"
+  }
+}
