@@ -8,3 +8,6 @@ variable "tools" {
     }
   }
 }
+
+variable "vpc" {}
+variable "env" {}

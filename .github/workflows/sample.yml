@@ -6,7 +6,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Terraform init
-        run: terraform init 
+        run: terraform init -backend-config=env_dev/state.tfvars
+      - name: Terraform plan
+        run: terraform plan -var-file=env_dev/main.tfvars
 
 
 #Hello test
