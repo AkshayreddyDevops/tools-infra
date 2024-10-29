@@ -9,5 +9,5 @@ variable "tools" {
   }
 }
 
-# variable "vpc" {}
+variable "vpc" {}
 variable "env" {}
