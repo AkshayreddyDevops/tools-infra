@@ -98,5 +98,5 @@ resource "aws_route_table_association" "public"{
 # }
 
 output "test" {
-  value = aws_route_table_association.public.subnet_id
+  value = aws_route_table_association.public.subnet_id[1]
 }
