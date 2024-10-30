@@ -5,6 +5,18 @@ resource "aws_vpc" "main" {
   }
 }
 
+#peering
+resource "aws_vpc_peering_connection" "vpcpeer" {
+  peer_vpc_id = aws_vpc.main.id
+  vpc_id = var.default_vpc_id
+  auto_accept = true
+}
+
+resource "aws_route" "default-vpc-peer-route" {
+  route_table_id = var.default_vpc_route_table
+  destination_cidr_block = var.cidr
+  vpc_peering_connection_id = aws_vpc_peering_connection.vpcpeer.id
+}
 resource "aws_subnet" "public" {
   count = length(var.public_subnets)
   vpc_id = aws_vpc.main.id
@@ -55,6 +67,10 @@ resource "aws_route_table" "public"{
     cidr_block = "0.0.0.0/0"
     gateway_id = aws_internet_gateway.main.id
   }
+  route {
+    cidr_block = var.default_vpc_cidr
+    vpc_peering_connection_id = aws_vpc_peering_connection.vpcpeer.id
+  }
    tags = {
     Name = "public-route-${split("-",var.availability_zone[count.index])[2]}"
   }
@@ -66,6 +82,10 @@ resource "aws_route_table" "db"{
   route {
     cidr_block = "0.0.0.0/0"
     nat_gateway_id = aws_nat_gateway.nat[count.index].id
+  }
+  route {
+    cidr_block = var.default_vpc_cidr
+    vpc_peering_connection_id = aws_vpc_peering_connection.vpcpeer.id
   }
    tags = {
     Name = "db-route-${split("-",var.availability_zone[count.index])[2]}"
@@ -80,6 +100,10 @@ resource "aws_route_table" "web"{
     cidr_block = "0.0.0.0/0"
     nat_gateway_id = aws_nat_gateway.nat[count.index].id
   }
+  route {
+    cidr_block = var.default_vpc_cidr
+    vpc_peering_connection_id = aws_vpc_peering_connection.vpcpeer.id
+  }
    tags = {
     Name = "web-route-${split("-",var.availability_zone[count.index])[2]}"
   }
@@ -92,6 +116,10 @@ resource "aws_route_table" "app"{
   route {
     cidr_block = "0.0.0.0/0"
     nat_gateway_id = aws_nat_gateway.nat[count.index].id
+  }
+  route {
+    cidr_block = var.default_vpc_cidr
+    vpc_peering_connection_id = aws_vpc_peering_connection.vpcpeer.id
   }
    tags = {
     Name = "app-route-${split("-",var.availability_zone[count.index])[2]}"

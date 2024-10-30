@@ -16,4 +16,7 @@ module "vpc" {
   app_subnets = var.vpc["app_subnets"]
   web_subnets = var.vpc["web_subnets"]
   availability_zone = var.vpc["availability_zone"]
+  default_vpc_id = var.vpc["default_vpc_id"]
+  default_vpc_route_table = var.vpc["default_vpc_route_table"]
+  default_vpc_cidr = var.vpc["default_vpc_cidr"]
 }
