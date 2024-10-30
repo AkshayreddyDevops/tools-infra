@@ -98,5 +98,5 @@ resource "aws_route_table_association" "public"{
 # }
 
 output "test" {
-  value = aws_route_table_association.public
+  value = aws_route_table_association.public[0].id
 }
