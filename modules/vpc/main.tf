@@ -139,7 +139,7 @@ resource "aws_internet_gateway" "main"{
 
 resource "aws_eip" "lb"{
   count = length(var.availability_zone)
-  instance = aws_internet_gateway.main
+  instance = aws_internet_gateway.main.id
   domain = "vpc"
 }
 resource "aws_nat_gateway" "nat" {
