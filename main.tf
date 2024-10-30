@@ -29,7 +29,7 @@ module "ec2" {
   app_port = each.value["app_port"]
   app_sg_cidr = each.value["app_sg_cidr"]
   subnet = module.vpc.subnet["web"][0]
+  vpc_id = module.vpc.vpc_id
   env = var.env
   bastion_nodes = var.bastion_nodes
-  vpc_id = module.vpc.vpc_id
 }
