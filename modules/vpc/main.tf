@@ -87,7 +87,7 @@ resource "aws_route_table" "app"{
 
 resource "aws_route_table_association" "public"{
   count = length(var.public_subnets)
-  subnet_id = aws_subnet.public.id[count.index]
+  subnet_id = aws_subnet.public.*.id[count.index]
   route_table_id = aws_route_table.public.id[count.index]
 }
 
@@ -96,3 +96,7 @@ resource "aws_route_table_association" "public"{
 #   subnet_id = aws_subnet.public.id
 #   route_table_id = aws_route_table.public.id
 # }
+
+output "test" {
+  value = aws_route_table_association.public.subnet_id
+}
