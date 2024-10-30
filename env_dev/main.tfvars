@@ -1,3 +1,5 @@
+env = "dev"
+bastion_nodes = ["172.31.40.105/32"]
 vpc =  {
   cidr = "10.10.0.0/16"
   public_subnets = ["10.10.0.0/24","10.10.1.0/24"] 
@@ -9,5 +11,12 @@ vpc =  {
   default_vpc_route_table = "rtb-0766992470b931582"
   default_vpc_cidr = "172.31.0.0/16"
 }
-env = "dev"
 
+ec2 = {
+   frontend ={
+     subnet_ref = "web"
+     instance_type = "t3.small"
+     app_port = 80
+     app_sg_cidr = ["10.10.2.0/24", "10.10.3.0/24"] 
+   }
+}
