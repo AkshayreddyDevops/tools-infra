@@ -50,7 +50,7 @@ resource "aws_subnet" "web" {
 resource "aws_route_table" "public"{
   count = length(var.public_subnets)
   vpc_id = aws_vpc.main.id
-  
+
   route {
     cidr_block = "0.0.0.0/0"
     gateway_id = aws_internet_gateway.main.id
@@ -63,7 +63,10 @@ resource "aws_route_table" "public"{
 resource "aws_route_table" "db"{
   count = length(var.db_subnets)
   vpc_id = aws_vpc.main.id
-
+  route {
+    cidr_block = "0.0.0.0/0"
+    nat_gateway_id = aws_nat_gateway.nat[count.index].id
+  }
    tags = {
     Name = "db-route-${split("-",var.availability_zone[count.index])[2]}"
   }
@@ -73,6 +76,10 @@ resource "aws_route_table" "web"{
   count = length(var.web_subnets)
   vpc_id = aws_vpc.main.id
 
+  route {
+    cidr_block = "0.0.0.0/0"
+    nat_gateway_id = aws_nat_gateway.nat[count.index].id
+  }
    tags = {
     Name = "web-route-${split("-",var.availability_zone[count.index])[2]}"
   }
@@ -82,6 +89,10 @@ resource "aws_route_table" "app"{
   count = length(var.app_subnets)
   vpc_id = aws_vpc.main.id
 
+  route {
+    cidr_block = "0.0.0.0/0"
+    nat_gateway_id = aws_nat_gateway.nat[count.index].id
+  }
    tags = {
     Name = "app-route-${split("-",var.availability_zone[count.index])[2]}"
   }
@@ -122,4 +133,23 @@ resource "aws_internet_gateway" "main"{
   tags = {
     Name = "${var.env}-igw"
   }
+}
+
+#NAT gateway
+
+resource "aws_eip" "lb"{
+  count = length(var.availability_zone)
+  instance = aws_internet_gateway.main
+  domain = "vpc"
+}
+resource "aws_nat_gateway" "nat" {
+  count = length(var.availability_zone)
+  allocation_id = aws_eip.lb[count.index].id
+  subnet_id = aws_subnet.public[count.index].id
+
+  tags ={
+    Name = "nat-gw--${split("-",var.availability_zone[count.index])[2]}"
+  }
+
+  depends_on = [ aws_internet_gateway.main ]
 }
