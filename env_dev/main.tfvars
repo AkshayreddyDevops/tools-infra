@@ -4,6 +4,7 @@ vpc =  {
   app_subnets = ["10.10.2.0/24", "10.10.3.0/24"] 
   db_subnets = ["10.10.4.0/24", "10.10.5.0/24"] 
   web_subnets = ["10.10.6.0/24", "10.10.7.0/24"] 
+  availability_zone = ["us-east-1a","us-east-1b"]
 }
 env = "dev"
 

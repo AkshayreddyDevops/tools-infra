@@ -15,4 +15,5 @@ module "vpc" {
   db_subnets = var.vpc["db_subnets"]
   app_subnets = var.vpc["app_subnets"]
   web_subnets = var.vpc["web_subnets"]
+  availability_zone = var.vpc["availability_zone"]
 }
