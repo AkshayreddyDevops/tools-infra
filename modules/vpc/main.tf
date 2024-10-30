@@ -137,14 +137,13 @@ resource "aws_internet_gateway" "main"{
 
 #NAT gateway
 
-resource "aws_eip" "lb"{
+resource "aws_eip" "ngw-ip"{
   count = length(var.availability_zone)
-  instance = aws_internet_gateway.main.id
   domain = "vpc"
 }
 resource "aws_nat_gateway" "nat" {
   count = length(var.availability_zone)
-  allocation_id = aws_eip.lb[count.index].id
+  allocation_id = aws_eip.ngw-ip[count.index].id
   subnet_id = aws_subnet.public[count.index].id
 
   tags ={
