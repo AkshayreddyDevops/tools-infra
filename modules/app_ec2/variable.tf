@@ -6,3 +6,5 @@ variable "app_port" {}
 variable "app_sg_cidr" {}
 variable "subnet_ids" {}
 variable "vpc_id" {}
+variable "asg" {} 
+

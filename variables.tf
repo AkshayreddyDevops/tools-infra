@@ -13,4 +13,6 @@ variable "vpc" {}
 variable "env" {}
 variable "app_ec2" {}
 variable "bastion_nodes" {}
+variable "db" {}
+variable "asg" {}
 

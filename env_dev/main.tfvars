@@ -17,6 +17,33 @@ app_ec2 = {
      subnet_ref = "web"
      instance_type = "t3.small"
      app_port = 80
-     app_sg_cidr = ["10.10.2.0/24", "10.10.3.0/24"] 
+     app_sg_cidr = ["10.10.0.0/24","10.10.1.0/24"]
    }
+}
+
+db = {
+  mongo = {
+    subnet_ref = "db"
+    instance_type = "t3.small"
+    allow_port = 27107
+    allow_sg_cidr = ["10.10.2.0/24", "10.10.3.0/24"] 
+  }
+  mysql = {
+    subnet_ref = "db"
+    instance_type = "t3.small"
+    allow_port = 3306
+    allow_sg_cidr = ["10.10.2.0/24", "10.10.3.0/24"] 
+  }
+  rabbitmq = {
+    subnet_ref = "db"
+    instance_type = "t3.small"
+    allow_port = 5672
+    allow_sg_cidr = ["10.10.2.0/24", "10.10.3.0/24"] 
+  }
+  redis = {
+    subnet_ref = "db"
+    instance_type = "t3.small"
+    allow_port = 6379
+    allow_sg_cidr = ["10.10.2.0/24", "10.10.3.0/24"] 
+  }
 }
