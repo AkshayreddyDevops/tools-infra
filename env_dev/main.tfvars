@@ -12,7 +12,7 @@ vpc =  {
   default_vpc_cidr = "172.31.0.0/16"
 }
 
-ec2 = {
+app_ec2 = {
    frontend ={
      subnet_ref = "web"
      instance_type = "t3.small"

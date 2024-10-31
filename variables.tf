@@ -11,6 +11,6 @@ variable "tools" {
 
 variable "vpc" {}
 variable "env" {}
-variable "ec2" {}
+variable "app_ec2" {}
 variable "bastion_nodes" {}
 
