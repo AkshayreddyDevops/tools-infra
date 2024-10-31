@@ -27,15 +27,15 @@ module "app_ec2" {
   for_each = var.app_ec2
   name = each.key
   instance_type = each.value["instance_type"]
-  app_port = each.value["app_port"]
-  app_sg_cidr = each.value["app_sg_cidr"]
+  allow_port = each.value["app_port"]
+  allow_sg_cidr = each.value["app_sg_cidr"]
   subnet_ids = module.vpc.subnet[each.value["subnet_ref"]]
   env = "${var.env}"
   bastion_nodes = var.bastion_nodes
   asg = true
 }
 module "db" {
-  source = "./module/ec2"
+  source = "./modules/app_ec2"
   for_each = var.db
   name = each.key
   instance_type = each_value["instance_type"]
@@ -43,6 +43,7 @@ module "db" {
   allow_sg_cidr = each.value["allow_sg_cidr"]
   subnet_ids = module.vpc.subnet[each.value["subnet_ref"]]
   env = var.env
-  boston_nodes = var.bastion_nodes
+  bastion_nodes = var.bastion_nodes
+  vpc_id = module.vpc.vpc_id
   asg = false
 }

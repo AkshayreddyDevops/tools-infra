@@ -14,10 +14,10 @@ resource "aws_security_group" "sg" {
     cidr_blocks = var.bastion_nodes
   }
     ingress {
-    from_port = var.app_port
-    to_port = var.app_port
+    from_port = var.allow_port
+    to_port = var.allow_port
     protocol = "tcp"
-    cidr_blocks = var.app_sg_cidr
+    cidr_blocks = var.allow_sg_cidr
   }
   tags = {
     Name = "${var.name}-${var.env}-sg"
@@ -62,7 +62,7 @@ resource "aws_instance" "main" {
   subnet_id = var.subnet_ids[0]
   vpc_security_group_ids = [aws_security_group.sg.id]
   tags = {
-    Name = "${var.name}-${var.env}-db"
+    Name = "${var.name}-${var.env}"
   }
 }
 
