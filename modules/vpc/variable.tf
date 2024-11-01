@@ -8,3 +8,4 @@ variable "availability_zone" {}
 variable "default_vpc_id" {}
 variable "default_vpc_route_table" {}
 variable "default_vpc_cidr" {}
+variable "asg" {} 
