@@ -1,5 +1,6 @@
 env = "dev"
 bastion_nodes = ["172.31.40.105/32"]
+asg = true
 vpc =  {
   cidr = "10.10.0.0/16"
   public_subnets = ["10.10.0.0/24","10.10.1.0/24"] 
