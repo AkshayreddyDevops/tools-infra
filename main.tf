@@ -47,7 +47,7 @@ module "db" {
   bastion_nodes = var.bastion_nodes
   vpc_id = module.vpc.vpc_id
   asg = false
-  test1 =  module.app_ec2.tst
+  test1 =  module.db.tst
 }
 
 output "t" {
