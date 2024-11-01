@@ -33,7 +33,6 @@ module "app_ec2" {
   env = "${var.env}"
   bastion_nodes = var.bastion_nodes
   asg = true
-  test1 =  module.app_ec2.tst
 }
 module "db" {
   source = "./modules/app_ec2"
@@ -47,9 +46,9 @@ module "db" {
   bastion_nodes = var.bastion_nodes
   vpc_id = module.vpc.vpc_id
   asg = false
-  test1 =  module.db.tst
 }
 
-output "t" {
-  value = module.db.test1
+output "test" {
+  value = module.app_ec2.test
 }
+

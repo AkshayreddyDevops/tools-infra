@@ -66,6 +66,7 @@ resource "aws_instance" "main" {
   }
 }
 
-output "tst" {
-  value = aws_launch_template.ltemplate[*].name
+
+output "test"{
+  value = aws_launch_template.ltemplate[*]
 }
