@@ -1,3 +1,3 @@
 output "test" {
-  value = aws_launch_template.ltemplate.*
+  value = aws_launch_template.ltemplate[*].name
 }
