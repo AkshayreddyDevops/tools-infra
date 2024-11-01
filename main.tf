@@ -48,7 +48,10 @@ module "db" {
   asg = false
 }
 
+module outputs {
+  source = "./module/app_ec2"
+}
 output "test" {
-  value = module.app_ec2.test
+  value = module.outputs.test
 }
 
