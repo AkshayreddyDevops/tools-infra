@@ -54,13 +54,13 @@ module outputs {
   name = "test"
   bastion_nodes = var.bastion_nodes
   instance_type = "test"
-  allow_sg_cidr = "0.0.0.0/0"
+  allow_sg_cidr = outputs.allow_sg_cidr
   asg = false
   allow_port = 111
   subnet_ids = ["1.1.1.1"]
   env = "dev"
 }
 output "test" {
-  value = module.outputs.test
+  value = outputs
 }
 
