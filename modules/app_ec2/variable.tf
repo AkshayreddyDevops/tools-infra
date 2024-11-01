@@ -7,5 +7,4 @@ variable "allow_sg_cidr" {}
 variable "subnet_ids" {}
 variable "vpc_id" {}
 variable "asg" {} 
-variable "test" {}
 

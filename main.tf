@@ -33,7 +33,6 @@ module "app_ec2" {
   env = "${var.env}"
   bastion_nodes = var.bastion_nodes
   asg = true
-  test = "t"
 }
 module "db" {
   source = "./modules/app_ec2"
@@ -47,7 +46,6 @@ module "db" {
   bastion_nodes = var.bastion_nodes
   vpc_id = module.vpc.vpc_id
   asg = false
-  test = "t"
 }
 
 module outputs {
@@ -61,9 +59,8 @@ module outputs {
   allow_port = 111
   subnet_ids = ["1.1.1.1"]
   env = "dev"
-  test = "t"
 }
 output "test" {
-  value = outputs.test
+  value = module.app_ec2.test
 }
 
