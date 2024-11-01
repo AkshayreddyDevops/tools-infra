@@ -59,6 +59,7 @@ module outputs {
   allow_port = 111
   subnet_ids = ["1.1.1.1"]
   env = "dev"
+  test = "t"
 }
 output "test" {
   value = outputs.test
