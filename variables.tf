@@ -15,7 +15,7 @@ variable "app_ec2" {}
 variable "bastion_nodes" {}
 variable "db" {}
 variable "asg" {}
-variable "outputs" {}
+
 
 
 
