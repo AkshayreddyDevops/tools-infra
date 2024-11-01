@@ -54,7 +54,7 @@ module outputs {
   name = "test"
   bastion_nodes = var.bastion_nodes
   instance_type = "test"
-  allow_sg_cidr = outputs.allow_sg_cidr
+  allow_sg_cidr = ["10.10.2.0/24", "10.10.3.0/24"] 
   asg = false
   allow_port = 111
   subnet_ids = ["1.1.1.1"]
