@@ -47,3 +47,7 @@ module "db" {
   vpc_id = module.vpc.vpc_id
   asg = false
 }
+
+output "test" {
+  value = module.db.test
+}
