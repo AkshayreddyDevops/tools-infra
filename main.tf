@@ -49,5 +49,5 @@ module "db" {
 }
 
 output "test" {
-  value = "${test}"
+  value = module.app_ec2.test
 }
