@@ -49,5 +49,5 @@ module "db" {
 }
 
 output "test1" {
-  value = module.app_ec2.test
+  value = module.db.test
 }
