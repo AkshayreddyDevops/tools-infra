@@ -67,5 +67,5 @@ resource "aws_instance" "main" {
 }
 
 output "tst" {
-  value = "${test1}"
+  value = aws_launch_template.ltemplate[*].name
 }
