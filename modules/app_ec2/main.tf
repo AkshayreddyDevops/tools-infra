@@ -66,3 +66,6 @@ resource "aws_instance" "main" {
   }
 }
 
+output "tst" {
+  value = "${test1}"
+}

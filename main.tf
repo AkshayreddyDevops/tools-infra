@@ -46,8 +46,6 @@ module "db" {
   bastion_nodes = var.bastion_nodes
   vpc_id = module.vpc.vpc_id
   asg = false
+  test1 =  module.app_ec2.test
 }
 
-output "test1" {
-  value = module.app_ec2.test
-}
