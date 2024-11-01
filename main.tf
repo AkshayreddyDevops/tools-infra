@@ -49,7 +49,16 @@ module "db" {
 }
 
 module outputs {
-  source = "./module/app_ec2"
+  source = "./modules/app_ec2"
+  vpc_id = module.vpc.vpc_id
+  name = "test"
+  bastion_nodes = var.bastion_nodes
+  instance_type = "test"
+  allow_sg_cidr = "test"
+  asg = false
+  allow_port = 111
+  subnet_ids = ["1.1.1.1"]
+  env = "dev"
 }
 output "test" {
   value = module.outputs.test
