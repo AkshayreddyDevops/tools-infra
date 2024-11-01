@@ -38,8 +38,8 @@ module "db" {
   source = "./modules/app_ec2"
   for_each = var.db
   name = each.key
-  instance_type = each_value["instance_type"]
-  allow_port = each_value["allow_port"]
+  instance_type = each.value["instance_type"]
+  allow_port = each.value["allow_port"]
   allow_sg_cidr = each.value["allow_sg_cidr"]
   subnet_ids = module.vpc.subnet[each.value["subnet_ref"]]
   env = var.env
