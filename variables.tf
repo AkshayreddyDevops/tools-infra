@@ -15,4 +15,8 @@ variable "app_ec2" {}
 variable "bastion_nodes" {}
 variable "db" {}
 variable "asg" {}
+variable "test"{
+  default = modules.app_ec2.output.test
+}
+
 
