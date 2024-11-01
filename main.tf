@@ -61,6 +61,6 @@ module outputs {
   env = "dev"
 }
 output "test" {
-  value = outputs
+  value = outputs.test
 }
 
