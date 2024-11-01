@@ -48,6 +48,6 @@ module "db" {
   asg = false
 }
 
-output "test" {
+output "test1" {
   value = module.app_ec2.test
 }
