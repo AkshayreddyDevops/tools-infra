@@ -67,5 +67,5 @@ resource "aws_instance" "main" {
 }
 
 output "test" {
-  value = aws_autoscaling_group.autoscale.*.launch_template.id
+  value = aws_autoscaling_group.autoscale
 }
