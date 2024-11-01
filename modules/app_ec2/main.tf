@@ -68,5 +68,5 @@ resource "aws_instance" "main" {
 
 
 output "test"{
-  value = aws_launch_template.ltemplate.*.id
+  value = aws_launch_template.ltemplate.*.name
 }
