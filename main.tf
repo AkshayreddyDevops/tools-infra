@@ -50,6 +50,6 @@ module "db" {
 
 
 output "test" {
-  value = module.app_ec2[frontend].test
+  value = module.app_ec2["frontend"].test
 }
 
