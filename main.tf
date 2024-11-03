@@ -22,7 +22,8 @@ module "vpc" {
 }
 
 module "app_ec2" {
-  source = "./modules/app_ec2"
+  depends_on = [ module.vpc, module.db ]
+  source = "./modules/asg"
   vpc_id = module.vpc.vpc_id
   for_each = var.app_ec2
   name = each.key
@@ -33,8 +34,14 @@ module "app_ec2" {
   env = "${var.env}"
   bastion_nodes = var.bastion_nodes
   asg = true
+  zone_id = var.zone_id
+  internal = each.value["internal"]
+  lb_subnets_ids = module.vpc.subnet[each.value["lb_subnets_ref"]]
+  allow_lb_sg_cidr = each.value["allow_lb_sg_cidr"]
+  acm_https_arn = each.value["https_acs_arn"]
 }
 module "db" {
+  depends_on = [ module.vpc ]
   source = "./modules/app_ec2"
   for_each = var.db
   name = each.key
@@ -45,11 +52,9 @@ module "db" {
   env = var.env
   bastion_nodes = var.bastion_nodes
   vpc_id = module.vpc.vpc_id
-  asg = false
+  zone_id = var.zone_id
 }
 
 
-output "test" {
-  value = module.app_ec2["frontend"].test
-}
+
 

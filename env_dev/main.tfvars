@@ -1,6 +1,8 @@
 env = "dev"
 bastion_nodes = ["172.31.40.105/32"]
 asg = true
+zone_id = "Z085093733LY1YYTUF9Q4"
+
 vpc =  {
   cidr = "10.10.0.0/16"
   public_subnets = ["10.10.0.0/24","10.10.1.0/24"] 
@@ -19,14 +21,29 @@ app_ec2 = {
      instance_type = "t3.small"
      allow_port = 80
      allow_sg_cidr = ["10.10.0.0/24","10.10.1.0/24"]
+     allow_lg_sg_cidr = ["0.0.0.0/24"]
+     internal = true
+     lb_subnets_ref = "public"
+     https_acs_arn = "Get arn from ACM"
    }
+   catalog ={
+     subnet_ref = "app"
+     instance_type = "t3.small"
+     allow_port = 8080
+     allow_sg_cidr = ["10.10.6.0/24", "10.10.7.0/24"] 
+     allow_lg_sg_cidr = ["10.10.2.0/24", "10.10.3.0/24"]
+     internal = false
+     lb_subnets_ref = "app"
+     https_acs_arn = null
+   }
+   
 }
 
 db = {
   mongo = {
     subnet_ref = "db"
     instance_type = "t3.small"
-    allow_port = 27107
+    allow_port = 27017
     allow_sg_cidr = ["10.10.2.0/24", "10.10.3.0/24"] 
   }
   mysql = {

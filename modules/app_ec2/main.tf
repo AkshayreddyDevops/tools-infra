@@ -25,48 +25,31 @@ resource "aws_security_group" "sg" {
 }
 
 
-resource "aws_launch_template" "ltemplate"{
-  count = var.asg ? 1 : 0
-  name = "${var.name}-${var.env}-lt"
-  image_id = data.aws_ami.ami.image_id
-  instance_type = var.instance_type
-  vpc_security_group_ids = [aws_security_group.sg.id]
-  tags = {
-    Name = "${var.name}-${var.env}-lt"
-  }
-}
-
-resource "aws_autoscaling_group" "autoscale" {
-  count = var.asg ? 1 : 0
-  name = "${var.name}-${var.env}-ausc"
-  desired_capacity = 1
-  max_size = 1
-  min_size = 1
-  vpc_zone_identifier = var.subnet_ids
-
-  launch_template {
-    id = aws_launch_template.ltemplate[0].id
-    version = "$Latest"
-  }
-  tag{
-    key = "Name"
-    propagate_at_launch = true
-    value = "${var.name}-${var.env}"
-  }
-}
 
 resource "aws_instance" "main" {
-  count = var.asg ? 0 : 1
   ami = data.aws_ami.ami.image_id
   instance_type = var.instance_type
-  subnet_id = var.subnet_ids[0]
+  subnet_id = var.subnet_ids
   vpc_security_group_ids = [aws_security_group.sg.id]
+  # to run env specific builds ansible/shell ect 
+  # user_data = base64decode(templatefile("${path.module}/userdata.sh"), {
+  #   env_name = var.env
+  #   role_name = var.role_name
+  # })
   tags = {
     Name = "${var.name}-${var.env}"
   }
 }
 
-
-output "test"{
-  value = aws_launch_template.ltemplate.*.name
+resource "aws_route53_record" "instance" {
+  zone_id = var.zone_id
+  name = "${var.name}-${var.env}"
+  type = "A"
+  ttl = 30
+  records = [aws_instance.main.*.private_ip]
 }
+
+
+
+
+

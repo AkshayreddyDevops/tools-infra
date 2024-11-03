@@ -15,6 +15,10 @@ variable "app_ec2" {}
 variable "bastion_nodes" {}
 variable "db" {}
 variable "asg" {}
+variable "zone_id" {}
+variable "acm_https_arn" {}
+
+
 
 
 
