@@ -11,7 +11,7 @@ resource "aws_security_group" "lbsg" {
     from_port = 80
     to_port = 80
     protocol = "TCP"
-    cidr_blocks = var.name == var.allow_lb_sg_cidr
+    cidr_blocks = var.allow_lg_sg_cidr
   }
     ingress {
     from_port = 443
