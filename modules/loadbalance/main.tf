@@ -17,7 +17,7 @@ resource "aws_security_group" "lbsg" {
     from_port = 443
     to_port = 443
     protocol = "TCP"
-    cidr_blocks = var.name == var.allow_lb_sg_cidr
+    cidr_blocks = var.allow_lg_sg_cidr
   }
   tags = {
     Name = "${var.name}-${var.env}-sg"
@@ -30,7 +30,7 @@ resource "aws_lb" "alb" {
   internal = var.internal
   load_balancer_type = "application"
   subnets =  var.subnet_ref
-  security_groups = [aws_secaws_security_group.lbsg.id]
+  security_groups = [aws_security_group.lbsg.id]
   tags = {
     Environment = "${var.name}-${var.env}"
   }
