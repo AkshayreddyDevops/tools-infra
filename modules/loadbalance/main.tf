@@ -61,7 +61,7 @@ resource "aws_lb_listener" "lb-lst" {
   ssl_policy = "ELBSecurityPolicy-2016-08"
   certificate_arn = ""
   default_action {
-    type = "fixed"
+    type = "fixed-response"
     fixed_response {
       content_type = "text/plain"
       message_body = "Configuration Error"
