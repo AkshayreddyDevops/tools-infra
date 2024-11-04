@@ -29,7 +29,7 @@ resource "aws_security_group" "sg" {
 resource "aws_instance" "main" {
   ami = data.aws_ami.ami.image_id
   instance_type = var.instance_type
-  subnet_id = var.subnet_ids
+  subnet_id = var.subnet_ids[0]
   vpc_security_group_ids = [aws_security_group.sg.id]
   # to run env specific builds ansible/shell ect 
   user_data = base64encode(templatefile("${path.module}/userdata.sh"
