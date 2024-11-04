@@ -158,10 +158,9 @@ resource "aws_lb_target_group" "alb-tg" {
 # }
 
 resource "aws_route53_record" "lb" {
-  count = var.asg ? 1 : 0
   zone_id = var.zone_id
   name = "${var.name}-${var.env}"
   type = "CNAME"
   ttl = 30
-  records = [aws_lb.alb.*.dns_name[count.index]]
+  records = [var.dns_name]
 }
