@@ -61,8 +61,7 @@ resource "aws_lb_listener" "lb-lst" {
   ssl_policy = "ELBSecurityPolicy-2016-08"
   certificate_arn = ""
   default_action {
-    type = "forword"
-    target_group_arn = aws_lb_target_group.alb-tg.arn
+    type = "fixed"
     fixed_response {
       content_type = "text/plain"
       message_body = "Configuration Error"
