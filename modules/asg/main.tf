@@ -71,7 +71,7 @@ resource "aws_autoscaling_group" "autoscale" {
   max_size = 1
   min_size = 1
   vpc_zone_identifier = var.subnet_ids
-  target_group_arns = [aws_lb_target_group.alb-tg.arns]
+  target_group_arns = [aws_lb_target_group.alb-tg.arn]
 
   launch_template {
     id = aws_launch_template.ltemplate.id
