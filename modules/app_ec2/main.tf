@@ -35,7 +35,7 @@ resource "aws_instance" "main" {
   user_data = base64encode(templatefile("${path.module}/userdata.sh")
   , {
     env_name = var.env
-    role_name = var.role_name
+    role_name = var.name
   })
   tags = {
     Name = "${var.name}-${var.env}"
