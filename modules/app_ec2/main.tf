@@ -32,11 +32,11 @@ resource "aws_instance" "main" {
   subnet_id = var.subnet_ids
   vpc_security_group_ids = [aws_security_group.sg.id]
   # to run env specific builds ansible/shell ect 
-  user_data = base64encode(templatefile("${path.module}/userdata.sh"))
-  # , {
-  #   env_name = var.env
-  #   role_name = var.role_name
-  # })
+  user_data = base64encode(templatefile("${path.module}/userdata.sh")
+  , {
+    env_name = var.env
+    role_name = var.role_name
+  })
   tags = {
     Name = "${var.name}-${var.env}"
   }
