@@ -39,6 +39,7 @@ module "app_ec2" {
   lb_subnets_ids = module.vpc.subnet[each.value["lb_subnets_ref"]]
   allow_lb_sg_cidr = each.value["allow_lb_sg_cidr"]
   acm_https_arn = each.value["https_acs_arn"]
+  dns_name = module.loadbalance[each.value["lb_subnets_ref"].dbs_name]
 }
 module "db" {
   depends_on = [ module.vpc ]
@@ -55,6 +56,15 @@ module "db" {
   zone_id = var.zone_id
 }
 
-
-
-
+module "loadbalance"{
+  source = "./modules/loadbalance"
+  for_each = var.load_balancer
+  env = var.env
+  lb_subnets_ids = module.vpc.subnet[each.value["subnet_ref"]]
+  name = each.key
+  allow_lg_sg_cidr = each.value["allow_lg_sg_cidr"]
+  internal = each.value["internal"]
+  load_balancer_type = each.value["load_balancer_type"]
+  vpc_id = module.vpc.vpc_id
+  subnet_ref = ""
+} 

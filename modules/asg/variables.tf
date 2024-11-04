@@ -18,3 +18,4 @@ variable "allow_lb_sg_cidr" {
   default = []
 }
 variable "acm_https_arn" {}
+variable "dns_name" {}

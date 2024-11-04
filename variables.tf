@@ -16,7 +16,8 @@ variable "bastion_nodes" {}
 variable "db" {}
 variable "asg" {}
 variable "zone_id" {}
-variable "acm_https_arn" {}
+variable "load_balancer" {}
+
 
 
 
