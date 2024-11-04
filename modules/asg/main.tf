@@ -99,7 +99,7 @@ resource "aws_autoscaling_group" "autoscale" {
 resource "aws_lb_target_group" "alb-tg" {
   name = "${var.name}-${var.env}-alb-tg"
   port = var.allow_port
-  protocol = "http"
+  protocol = "HTTPS"
   vpc_id = var.vpc_id
   health_check {
     enabled = true
