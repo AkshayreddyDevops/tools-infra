@@ -1,3 +1,28 @@
+resource "aws_security_group" "sg" {
+  name = "${var.name}-${var.env}-sg"
+  vpc_id = var.vpc_id
+  egress {
+    from_port = 0
+    to_port = 0
+    cidr_blocks = ["0.0.0.0/0"]
+    protocol = "-1"
+  }
+  ingress {
+    from_port = 22
+    to_port = 22
+    protocol = "tcp"
+    cidr_blocks = var.bastion_nodes
+  }
+    ingress {
+    from_port = var.allow_port
+    to_port = var.allow_port
+    protocol = "tcp"
+    cidr_blocks = var.allow_sg_cidr
+  }
+  tags = {
+    Name = "${var.name}-${var.env}-sg"
+  }
+}
 # Moved to load_balancer
 # resource "aws_security_group" "lbsg" {
 #   name = "${var.name}-${var.env}-lbsg"
@@ -132,11 +157,11 @@ resource "aws_lb_target_group" "alb-tg" {
 #   }
 # }
 
-# resource "aws_route53_record" "lb" {
-#   count = var.asg ? 1 : 0
-#   zone_id = var.zone_id
-#   name = "${var.name}-${var.env}"
-#   type = "CNAME"
-#   ttl = 30
-#   records = [aws_lb.alb.*.dns_name[count.index]]
-# }
+resource "aws_route53_record" "lb" {
+  count = var.asg ? 1 : 0
+  zone_id = var.zone_id
+  name = "${var.name}-${var.env}"
+  type = "CNAME"
+  ttl = 30
+  records = [aws_lb.alb.*.dns_name[count.index]]
+}
