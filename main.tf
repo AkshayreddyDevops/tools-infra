@@ -66,5 +66,5 @@ module "loadbalance"{
   internal = each.value["internal"]
   load_balancer_type = each.value["load_balancer_type"]
   vpc_id = module.vpc.vpc_id
-  subnet_ref = ""
+  subnet_ref = each.value["subnet_ref"]
 } 
