@@ -6,4 +6,4 @@ variable "lb_subnets_ids" {}
 variable "name" {}
 variable "vpc_id" {}
 variable "subnet_ref" {}
-variable "subnet_ids" {}
+# variable "subnet_ids" {}
