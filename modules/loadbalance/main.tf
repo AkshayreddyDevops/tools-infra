@@ -43,7 +43,7 @@ resource "aws_lb_listener" "lb-redirect-http" {
   port = "80"
   protocol = "HTTP"
   ssl_policy = "ELBSecurityPolicy-2016-08"
-  certificate_arn = ""
+  # certificate_arn = ""
   default_action {
     type = "redirect"
     redirect{
@@ -60,7 +60,7 @@ resource "aws_lb_listener" "lb-lst" {
   port = "443"
   protocol = "HTTPS"
   ssl_policy = "ELBSecurityPolicy-2016-08"
-  certificate_arn = ""
+  # certificate_arn = ""
   default_action {
     type = "fixed-response"
     fixed_response {
