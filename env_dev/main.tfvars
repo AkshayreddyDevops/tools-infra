@@ -68,7 +68,7 @@ db = {
 
 
 load_balancer = {
-  private_lb = {
+  private = {
     internal = true
     load_balancer_type = "application"
     allow_lg_sg_cidr = ["10.10.2.0/24", "10.10.3.0/24","10.10.3.0/24","10.10.3.0/24"]
