@@ -9,9 +9,8 @@ jobs:
         run: terraform init -backend-config=env_dev/state.tfvars
       - name: Terraform plan
         run: terraform plan -var-file=env_dev/main.tfvars 
- 
-      # - name: Terraform apply
-      #   run: terraform apply -var-file=env_dev/main.tfvars -auto-approve
+      - name: Terraform apply
+        run: terraform apply -var-file=env_dev/main.tfvars -auto-approve
       # - name: Terraform destroy
       #   run: terraform destroy -var-file=env_dev/main.tfvars -auto-approve
 
