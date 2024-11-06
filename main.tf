@@ -70,6 +70,3 @@ module "loadbalance"{
   subnet_ref = each.value["subnet_ref"]
 } 
 
-output test {
-  value = module.loadbalance["lb_ref"]
-}
