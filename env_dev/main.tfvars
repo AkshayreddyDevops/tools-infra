@@ -25,16 +25,18 @@ app_ec2 = {
      internal = true
      lb_subnets_ref = "public"
      https_acs_arn = "Get arn from ACM"
+     lb_ref = "public"
    }
    catalog ={
      subnet_ref = "app"
      instance_type = "t3.small"
      allow_port = 8080
      allow_sg_cidr = ["10.10.6.0/24", "10.10.7.0/24"] 
-     allow_lb_sg_cidr = ["10.10.2.0/24", "10.10.3.0/24"]
+     allow_lb_sg_cidr = ["10.10.2.0/24", "10.10.3.0/24","10.10.4.0/24","10.10.5.0/24"]
      internal = false
      lb_subnets_ref = "app"
      https_acs_arn = null
+     lb_ref = "private"
    }
    
 }
@@ -71,7 +73,7 @@ load_balancer = {
   private = {
     internal = true
     load_balancer_type = "application"
-    allow_lg_sg_cidr = ["10.10.2.0/24", "10.10.3.0/24","10.10.3.0/24","10.10.3.0/24"]
+    allow_lg_sg_cidr = ["10.10.2.0/24", "10.10.3.0/24","10.10.4.0/24","10.10.5.0/24"]
     subnet_ref = "app"
   }
 
