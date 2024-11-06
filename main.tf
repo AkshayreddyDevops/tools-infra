@@ -70,5 +70,5 @@ module "loadbalance"{
 } 
 
 output test {
-  value = module.vpc.subnet[each.value["web"]]
+  value = module.vpc.subnet[aws_subnet.web[0]["web"]]
 }
