@@ -68,3 +68,7 @@ module "loadbalance"{
   vpc_id = module.vpc.vpc_id
   subnet_ref = each.value["subnet_ref"]
 } 
+
+output test {
+  value = module.vpc.subnet[each.value["web"]]
+}
