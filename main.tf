@@ -40,7 +40,7 @@ module "app_ec2" {
   allow_lb_sg_cidr = each.value["allow_lb_sg_cidr"]
   acm_https_arn = each.value["https_acs_arn"]
   # dns_name = module.vpc.subnet[each.value["subnet_ref"]]
-  dns_name = module.loadbalance[each.value["lb_ref"]]
+  dns_name = module.loadbalance.dns_name[each.value["lb_ref"]]
 }
 module "db" {
   depends_on = [ module.vpc ]
@@ -71,5 +71,5 @@ module "loadbalance"{
 } 
 
 output test {
-  value = module.vpc.subnet["web"][0]
+  value = module.loadbalance["lb_ref"]
 }
