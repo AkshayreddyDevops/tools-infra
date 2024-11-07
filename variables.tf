@@ -5,9 +5,21 @@ variable "tools" {
       policy_name = [
         "AdministratorAccess"
       ]
+      volume_size = 30
+    }
+    minikube = {
+      name = "minikube"
+      instance_type = "t3.medium"
+      port_no =  {
+        kube = 8443
+      }
+      policy_actions = []
+      volume_size = 30
     }
   }
 }
+
+
 
 variable "vpc" {}
 variable "env" {}

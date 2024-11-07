@@ -4,6 +4,7 @@
 #   instance_type = each.value["instance_type"]
 #   name = each.key
 #   policy_name = each.value["policy_name"]
+#   volume_size = each.value["volume_size"]
 # }
 
 
